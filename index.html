@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="shortcut icon" href="https://www.bridgelabz.com/favicon.ico" type="image/x-icon">
+</head>
+<style>
+    .all-video-content {
+        width: 50%;
+    }
+
+    @media only screen and (max-width: 960px) {
+        .all-video-content {
+            width: 70%;
+        }
+    }
+</style>
+
+<body style="margin:0">
+    <header style="padding: 20px 50px;">
+        <img src="https://codinclub.incubation.bridgelabz.com/assets/images/bridgelabzForm.svg" alt="bridgelabz">
+    </header>
+    <div style="min-height: calc(100vh - 80px);background-color: #8080800d;display: flex;
+    justify-content: center;">
+        <div class="all-video-content" >
+            <video id="video1" style="margin:30vh 0;outline: none;" width="100%" controls muted='true' loop>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+                Your browser does not support HTML video.
+            </video>
+            <video id="video1" style="margin:0 0 30vh ;outline: none;" controls width="100%" muted='true' loop>
+
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
+                    type="video/webm">
+
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+
+                Sorry, your browser doesn't support embedded videos.
+            </video>
+            <video id="video1" style="margin:30vh 0;outline: none;" width="100%" controls muted='true' loop>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+                Your browser does not support HTML video.
+            </video>
+            <video id="video1" style="margin:0 0 30vh ;outline: none;" controls width="100%" muted='true' loop>
+
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
+                    type="video/webm">
+
+                <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+
+                Sorry, your browser doesn't support embedded videos.
+            </video>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            console.log("ready!");
+
+            let options = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+            let callback = (entries, observer) => {
+                console.log(entries);
+                entries.forEach(element => {
+                    console.log();
+                    if (element.isIntersecting && element.target.paused) {
+                        console.log('true');
+                        element.target.play()
+                        // element.target.muted = false
+                    } else {
+                        console.log('false', element);
+                        element.target.pause()
+                        // element.target.muted = true
+                    }
+                });
+            }
+            const allVideo = document.querySelectorAll('video');
+            let observer = new IntersectionObserver(callback, options);
+            allVideo.forEach(video => {
+                observer.observe(video);
+            });
+            $("video").click(function () {
+                this.onplay = () => {
+                    console.log('play');
+                    this.muted = false
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
